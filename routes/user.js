@@ -14,10 +14,13 @@ try{
 	const existingEmail = await User.findOne({email: email});
 	if(existingUser)
 		{
-			return res.status(400).json({message:"Username already exists"}); 
+			return res
+				.status(400)
+				.json({message:"Username already exists"}); 
 	}
 	else if(username.length < 4) {
-		return res.status(400).json({message:"Username should have atleast 4 characters"});
+		return res
+			.status(400).json({message:"Username should have atleast 4 characters"});
 	}
 	
 	if (existingEmail)
@@ -43,7 +46,7 @@ try{
 });
 
 //log=in 
-router.get("/log-in", async(req,res)=>{
+router.post("/log-in", async(req,res)=>{
     const {username, password} = req.body;
     const existingUser = await User.findOne({username: username});
     if(!existingUser){
